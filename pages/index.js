@@ -2,10 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { useState } from "react";
 import { getSession, useSession, signOut } from "next-auth/react";
+import connectMongo from "../database/conn";
+import Users from "../model/Schema";
 
-export default function Home() {
+export default function Home({ userCount, users }) {
   const { data: session } = useSession();
 
   function handleSignOut() {
@@ -18,7 +19,7 @@ export default function Home() {
         <title>Домашня Сторінка</title>
       </Head>
 
-      {session ? User({ session, handleSignOut }) : Guest()}
+      {session ? User({ session, handleSignOut, userCount, users }) : Guest()}
     </div>
   );
 }
@@ -26,11 +27,11 @@ export default function Home() {
 // Guest
 function Guest() {
   return (
-    <main className="container mx-auto text-center py-20">
+    <main className="container mx-auto text-center py-20 bg-gradient-to-r from-violet-500 to-fuchsia-500">
       <h3 className="text-4xl font-bold">Guest Homepage</h3>
 
       <div className="flex justify-center">
-        <Link href={"/login"}>
+        <Link legacyBehavior href={"/login"}>
           <a className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50">
             Sign In
           </a>
@@ -41,28 +42,68 @@ function Guest() {
 }
 
 // Authorize User
-function User({ session, handleSignOut }) {
+function User({ session, handleSignOut, userCount, users }) {
   return (
-    <main className="container mx-auto text-center py-20">
-      <h3 className="text-4xl font-bold">Вітаю! Ви успішно зареєструвались</h3>
+    <main className="container mx-auto text-center py-20 bg-gray-100 rounded-lg shadow-md p-8">
+      <h3 className="text-4xl font-bold text-indigo-600 mb-4">
+        Вітаю, {session.user.name}!
+      </h3>
 
-      <div className="details">
-        <h5>{session.user.name}</h5>
-        <h5>{session.user.email}</h5>
+      <div className="details mt-4">
+        <h5 className="text-2xl font-semibold">{session.user.name}</h5>
+        <h5 className="text-lg">{session.user.email}</h5>
       </div>
 
-      <div className="flex justify-center">
+      <p className="mt-6 text-gray-800 text-xl flex items-center justify-center">
+        Загальна кількість користувачів{" "}
+        <span className="font-bold text-indigo-500 ml-2 mr-2">Kokorooz</span>{" "}
+        <Image
+          alt="smile"
+          className="mr-2"
+          src={"/assets/smile.svg"}
+          width={30}
+          height={30}
+        />{" "}
+        : {userCount}
+      </p>
+
+      <div className="user-list mt-6">
+        <h4 className="text-2xl font-semibold mb-4">Список користувачів:</h4>
+        <div className="flex overflow-x-auto justify-center">
+          <table className="table-auto bg-white rounded-md overflow-hidden">
+            <thead className="bg-indigo-600 text-white">
+              <tr>
+                <th className="px-4 py-2">#</th>
+                <th className="px-4 py-2">Username</th>
+                <th className="px-4 py-2">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr
+                  key={user.email}
+                  className={index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}
+                >
+                  <td className="px-4 py-2">{index + 1}</td>
+                  <td className="px-4 py-2 font-semibold">{user.username}</td>
+                  <td className="px-4 py-2">{user.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="flex flex-col mt-8 md:flex-row md:space-x-4 md:justify-center">
         <button
           onClick={handleSignOut}
-          className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 "
+          className="w-full md:w-auto px-6 py-2 rounded-full bg-red-500 text-white hover:bg-red-700 focus:outline-none focus:ring focus:border-red-300"
         >
           Вийти
         </button>
-      </div>
 
-      <div className="flex justify-center">
-        <Link href={"/profile"}>
-          <a className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50">
+        <Link legacyBehavior href="/profile">
+          <a className="w-full mt-4 md:w-auto md:mt-0 px-6 py-2 rounded-full bg-indigo-500 text-white hover:bg-indigo-700 focus:outline-none focus:ring focus:border-indigo-300">
             Ваша сторінка
           </a>
         </Link>
@@ -82,8 +123,38 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
+  // Отримуємо загальну кількість користувачів
+  const userCount = await getUsersCount();
+
+  // Отримуємо інформацію про всіх користувачів
+  const users = await getAllUsers();
+  // Серіалізуємо дані у формат JSON
+  const serializedUsers = JSON.parse(JSON.stringify(users));
 
   return {
-    props: { session },
+    props: { session, userCount, users: serializedUsers },
   };
+}
+// Функція для отримання кількості користувачів
+async function getUsersCount() {
+  try {
+    await connectMongo();
+    const userCount = await Users.countDocuments();
+    return userCount;
+  } catch (error) {
+    console.error("Помилка при отриманні кількості користувачів:", error);
+    return 0;
+  }
+}
+
+// Функція для отримання інформації про всіх користувачів
+async function getAllUsers() {
+  try {
+    await connectMongo();
+    const users = await Users.find({}, { username: 1, email: 1 });
+    return users;
+  } catch (error) {
+    console.error("Помилка при отриманні інформації про користувачів:", error);
+    return [];
+  }
 }

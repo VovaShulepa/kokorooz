@@ -2,12 +2,13 @@ import Head from "next/head";
 import Layout from "../layout/layout";
 import Link from "next/link";
 import styles from "../styles/Form.module.css";
-import Image from "next/image";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { registerValidate } from "../lib/validate";
 import { useRouter } from "next/router";
+import { connectMongo } from "../database/conn";
+import Users from "../model/Schema";
 
 export default function Register() {
   const [show, setShow] = useState({ password: false, cpassword: false });
@@ -23,18 +24,52 @@ export default function Register() {
     onSubmit,
   });
 
-  async function onSubmit(values) {
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    };
+  // Функція для перевірки існування імейла в базі даних
+  async function isEmailTaken(email) {
+    try {
+      await connectMongo(); // Підключення до бази даних
+      const existingUser = await Users.findOne({ email });
+      return !!existingUser; // Повертає true, якщо імейл вже існує
+    } catch (error) {
+      console.error("Помилка при перевірці існування імейла:", error);
+      return false;
+    }
+  }
 
-    await fetch("http://localhost:3000/api/auth/signup", options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) router.push("http://localhost:3000");
-      });
+  async function onSubmit(values) {
+    // Перевірка існування імейла у базі даних
+    let emailTaken;
+    try {
+      emailTaken = await isEmailTaken(values.email);
+
+      if (emailTaken) {
+        formik.setFieldError("email", "Цей імейл вже зареєстровано");
+      } else {
+        // Якщо імейл не зайнятий, продовжити реєстрацію
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: formik.values.username,
+            email: formik.values.email,
+            password: formik.values.password,
+          }),
+        };
+
+        await fetch("http://localhost:3000/api/auth/signup", options)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data) {
+              router.push("http://localhost:3000");
+            }
+          })
+          .catch((error) => {
+            console.error("Помилка при реєстрації:", error.message);
+          });
+      }
+    } catch (error) {
+      console.error("Помилка при перевірці існування імейла:", error);
+    }
   }
 
   return (
@@ -43,7 +78,7 @@ export default function Register() {
         <title>Реєстрація</title>
       </Head>
 
-      <section className="w-3/4 mx-auto flex flex-col gap-10">
+      <section className="w-3/4 mx-auto flex flex-col gap-10 ">
         <div className="title">
           <h1 className="text-gray-800 text-4xl font-bold py-4">
             Реєстрація <br />
@@ -57,7 +92,7 @@ export default function Register() {
         </div>
 
         {/* form */}
-        <form className="flex flex-col gap-5" onSubmit={formik.handleSubmit}>
+        <form className="flex flex-col gap-2" onSubmit={formik.handleSubmit}>
           <div
             className={`${styles.input_group} ${
               formik.errors.username && formik.touched.username
@@ -68,7 +103,7 @@ export default function Register() {
             <input
               type="text"
               name="Username"
-              placeholder="Username"
+              placeholder="Користувач"
               className={styles.input_text}
               {...formik.getFieldProps("username")}
             />
@@ -76,7 +111,11 @@ export default function Register() {
               <HiOutlineUser size={25} />
             </span>
           </div>
-          {/* {formik.errors.username && formik.touched.username ? <span className='text-rose-500'>{formik.errors.username}</span> : <></>} */}
+          {formik.errors.username && formik.touched.username ? (
+            <span className="text-rose-500">{formik.errors.username}</span>
+          ) : (
+            <></>
+          )}
           <div
             className={`${styles.input_group} ${
               formik.errors.email && formik.touched.email
@@ -95,7 +134,11 @@ export default function Register() {
               <HiAtSymbol size={25} />
             </span>
           </div>
-          {/* {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{formik.errors.email}</span> : <></>} */}
+          {formik.errors.email && formik.touched.email ? (
+            <span className="text-rose-500">{formik.errors.email}</span>
+          ) : (
+            <></>
+          )}
           <div
             className={`${styles.input_group} ${
               formik.errors.password && formik.touched.password
@@ -106,7 +149,7 @@ export default function Register() {
             <input
               type={`${show.password ? "text" : "password"}`}
               name="password"
-              placeholder="password"
+              placeholder="Пароль"
               className={styles.input_text}
               {...formik.getFieldProps("password")}
             />
@@ -117,7 +160,11 @@ export default function Register() {
               <HiFingerPrint size={25} />
             </span>
           </div>
-          {/* {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{formik.errors.password}</span> : <></>} */}
+          {formik.errors.password && formik.touched.password ? (
+            <span className="text-rose-500">{formik.errors.password}</span>
+          ) : (
+            <></>
+          )}
 
           <div
             className={`${styles.input_group} ${
@@ -129,7 +176,7 @@ export default function Register() {
             <input
               type={`${show.cpassword ? "text" : "password"}`}
               name="cpassword"
-              placeholder="Confirm Password"
+              placeholder="Повторіть пароль"
               className={styles.input_text}
               {...formik.getFieldProps("cpassword")}
             />
@@ -140,7 +187,11 @@ export default function Register() {
               <HiFingerPrint size={25} />
             </span>
           </div>
-          {/* {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>} */}
+          {formik.errors.cpassword && formik.touched.cpassword ? (
+            <span className="text-rose-500">{formik.errors.cpassword}</span>
+          ) : (
+            <></>
+          )}
 
           {/* login buttons */}
           <div className="input-button">
@@ -153,7 +204,7 @@ export default function Register() {
         {/* bottom */}
         <p className="text-center text-gray-400 ">
           Вже маєш аккаунт?{" "}
-          <Link href={"/login"}>
+          <Link legacyBehavior href={"/login"}>
             <a className="text-blue-700">Увійти</a>
           </Link>
         </p>

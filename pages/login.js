@@ -67,7 +67,7 @@ export default function Login() {
         </div>
 
         {/* form */}
-        <form className="flex flex-col gap-5" onSubmit={formik.handleSubmit}>
+        <form className="flex flex-col gap-2" onSubmit={formik.handleSubmit}>
           <div
             className={`${styles.input_group} ${
               formik.errors.email && formik.touched.email
@@ -86,7 +86,11 @@ export default function Login() {
               <HiAtSymbol size={25} />
             </span>
           </div>
-          {/* {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{formik.errors.email}</span> : <></>} */}
+          {formik.errors.email && formik.touched.email ? (
+            <span className="text-rose-500">{formik.errors.email}</span>
+          ) : (
+            <></>
+          )}
 
           <div
             className={`${styles.input_group} ${
@@ -98,7 +102,7 @@ export default function Login() {
             <input
               type={`${show ? "text" : "password"}`}
               name="password"
-              placeholder="password"
+              placeholder="Пароль"
               className={styles.input_text}
               {...formik.getFieldProps("password")}
             />
@@ -110,12 +114,12 @@ export default function Login() {
             </span>
           </div>
 
-          {/* {formik.errors.password && formik.touched.password ? (
+          {formik.errors.password && formik.touched.password ? (
             <span className="text-rose-500">{formik.errors.password}</span>
           ) : (
             <></>
-          )} */}
-          {/* login buttons */}
+          )}
+
           <div className="input-button">
             <button type="submit" className={styles.button}>
               Увійти
@@ -127,7 +131,7 @@ export default function Login() {
               onClick={handleGoogleSignin}
               className={styles.button_custom}
             >
-              Увійти за допомогою Google{" "}
+              Увійти з Google{" "}
               <Image
                 src={"/assets/google.svg"}
                 alt="google"
@@ -138,10 +142,9 @@ export default function Login() {
           </div>
         </form>
 
-        {/* bottom */}
         <p className="text-center text-gray-400 ">
-          Ще не зареєстрований?{" "}
-          <Link href={"/register"}>
+          Ще не зареєстрований(на)?{" "}
+          <Link legacyBehavior href={"/register"}>
             <a className="text-blue-700">Зареєструватись</a>
           </Link>
         </p>

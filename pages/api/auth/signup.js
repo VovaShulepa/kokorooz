@@ -3,7 +3,7 @@ import Users from "../../../model/Schema";
 import { hash } from "bcryptjs";
 
 export default async function handler(req, res) {
-  connectMongo().catch((error) =>
+  await connectMongo().catch((error) =>
     res.json({ error: "Втрачено з'єднання...!" })
   );
 
@@ -14,13 +14,12 @@ export default async function handler(req, res) {
     const { username, email, password } = req.body;
 
     // check duplicate users
-    const checkexisting = await Users.findOne({ email });
-    if (checkexisting)
+    const checkExisting = await Users.findOne({ email });
+    if (checkExisting)
       return res
         .status(422)
         .json({ message: " Такий Користувач вже існує..!" });
 
-    // hash password
     Users.create(
       { username, email, password: await hash(password, 12) },
       function (err, data) {
@@ -34,3 +33,12 @@ export default async function handler(req, res) {
       .json({ message: "HTTP method not valid only POST Accepted" });
   }
 }
+
+// fetch
+const options = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ username, email, password }),
+};

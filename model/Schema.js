@@ -1,11 +1,12 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema({
-    username : String,
-    email: String,
-    password: String
-})
+  username: String,
+  email: String,
+  password: String,
+});
 
-const Users = models.user || model('user', userSchema);
+// Перевірка, чи модель 'user' вже існує в models
+const Users = models.user ? models.user : model("user", userSchema);
 
 export default Users;

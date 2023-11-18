@@ -8,7 +8,6 @@ import { compare } from "bcryptjs";
 
 export default NextAuth({
   providers: [
-    // Google Provider
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
@@ -42,8 +41,11 @@ export default NextAuth({
       },
     }),
   ],
-  secret: "XH6bp/TkLvnUkQiPDEZNyHc0CV+VV5RL/n+HdVHoHN0=",
+  secret: "KGz/8TViRGHntEFFe2ccGK7X1QYfgzhR36LfhLKNeis=",
   session: {
     strategy: "jwt",
+    jwt: {
+      secret: process.env.JWT_SECRET,
+    },
   },
 });
