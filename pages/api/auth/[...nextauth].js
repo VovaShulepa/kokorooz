@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectMongo from "../../../database/conn";
 import Users from "../../../model/Schema";
@@ -15,29 +14,56 @@ export default NextAuth({
 
     CredentialsProvider({
       name: "Credentials",
-      async authorize(credentials, req) {
-        connectMongo().catch((error) => {
-          error: "Connection Failed...!";
-        });
+      authorize: async (credentials, req) => {
+        try {
+          await connectMongo(); // Використовуйте try-catch для обробки помилок підключення
 
-        // check user existance
-        const result = await Users.findOne({ email: credentials.email });
-        if (!result) {
-          throw new Error("No user Found with Email Please Sign Up...!");
+          if (credentials.provider === "google") {
+            const googleUser = await fetch(
+              "https://www.googleapis.com/oauth2/v3/userinfo",
+              {
+                headers: {
+                  Authorization: `Bearer ${credentials.accessToken}`,
+                },
+              }
+            ).then((res) => res.json());
+
+            const existingUser = await Users.findOne({
+              email: googleUser.email,
+            });
+
+            if (!existingUser) {
+              const newUser = new Users({
+                username: googleUser.name,
+                email: googleUser.email,
+                // інші дані, які ви хочете зберегти
+              });
+              await newUser.save();
+            }
+          } else {
+            const result = await Users.findOne({ email: credentials.email });
+            if (!result) {
+              throw new Error("No user found with this email. Please sign up!");
+            }
+
+            const checkPassword = await compare(
+              credentials.password,
+              result.password
+            );
+
+            if (!checkPassword || result.email !== credentials.email) {
+              throw new Error("Username or Password doesn't match");
+            }
+
+            return {
+              id: result._id,
+              name: result.username,
+              email: result.email,
+            };
+          }
+        } catch (error) {
+          throw new Error(`Error during authorization: ${error.message}`);
         }
-
-        // compare()
-        const checkPassword = await compare(
-          credentials.password,
-          result.password
-        );
-
-        // incorrect password
-        if (!checkPassword || result.email !== credentials.email) {
-          throw new Error("Username or Password doesn't match");
-        }
-
-        return result;
       },
     }),
   ],

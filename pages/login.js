@@ -36,14 +36,22 @@ export default function Login() {
     if (status.ok) {
       router.push(status.url);
     } else {
-      // Відображення помилкового повідомлення для користувача
-      formik.setFieldError("password", "Неправильна пошта або пароль!");
+      if (status.error === "No user found with this email. Please sign up!") {
+        formik.setFieldError("email", "Користувача з такою поштою не існує");
+      } else {
+        // Displaying a generic error message for other errors
+        formik.setFieldError("password", "Неправильна пошта або пароль!");
+      }
     }
   }
 
   // Google Handler function
   async function handleGoogleSignin() {
-    signIn("google", { callbackUrl: "http://localhost:3000" });
+    console.log("Handle Google Signin called");
+    const result = await signIn("google", {
+      callbackUrl: "http://localhost:3000",
+    });
+    console.log("Google Signin result:", result);
   }
 
   return (
@@ -55,17 +63,14 @@ export default function Login() {
       <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
           <h1 className="text-gray-800 text-4xl font-bold py-4 flex justify-center items-center">
+            Увійти{" "}
             <Image
-              alt="smile"
+              alt="corn"
               className="mr-2"
-              src={"/assets/smile.svg"}
+              src={"/assets/corn.svg"}
               width={30}
               height={30}
-            />{" "}
-            Kokorooz
-          </h1>
-          <h1 className="text-gray-600 text-2xl font-bold py-4">
-            Знайди свою половинку ❤️ &#128152;
+            />
           </h1>
           <p className="w-3/4 mx-auto text-gray-400">
             Реєструйся отримай 2$ на карту. <br />
