@@ -3,16 +3,36 @@ import Layout from "../layout/layout";
 import Link from "next/link";
 import styles from "../styles/Form.module.css";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { registerValidate } from "../lib/validate";
 import { useRouter } from "next/router";
-import { connectMongo } from "../database/conn";
-import Users from "../model/Schema";
+
+const Modal = ({ children, onClose }) => {
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-70 z-50"
+      onClick={onClose}
+    >
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-md shadow-lg">
+        <span
+          className="absolute top-0 right-0 p-4 cursor-pointer text-2xl"
+          onClick={onClose}
+        >
+          &times;
+        </span>
+        {children}
+      </div>
+    </div>
+  );
+};
 
 export default function Register() {
   const [show, setShow] = useState({ password: false, cpassword: false });
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -24,53 +44,43 @@ export default function Register() {
     onSubmit,
   });
 
-  // Функція для перевірки існування імейла в базі даних
-  async function isEmailTaken(email) {
-    try {
-      await connectMongo(); // Підключення до бази даних
-      const existingUser = await Users.findOne({ email });
-      return !!existingUser; // Повертає true, якщо імейл вже існує
-    } catch (error) {
-      console.error("Помилка при перевірці існування імейла:", error);
-      return false;
-    }
-  }
-
   async function onSubmit(values) {
-    // Перевірка існування імейла у базі даних
-    let emailTaken;
+    setErrorMessage(null);
+    console.log("Form values:", values);
+
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    };
+    console.log("Options:", options);
     try {
-      emailTaken = await isEmailTaken(values.email);
+      const res = await fetch("/api/auth/signup", options);
+      console.log("HTTP Status:", res.status);
 
-      if (emailTaken) {
-        formik.setFieldError("email", "Цей імейл вже зареєстровано");
-      } else {
-        // Якщо імейл не зайнятий, продовжити реєстрацію
-        const options = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: formik.values.username,
-            email: formik.values.email,
-            password: formik.values.password,
-          }),
-        };
+      const data = await res.json();
 
-        await fetch("http://localhost:3000/api/auth/signup", options)
-          .then((res) => res.json())
-          .then((data) => {
-            if (data) {
-              router.push("http://localhost:3000");
-            }
-          })
-          .catch((error) => {
-            console.error("Помилка при реєстрації:", error.message);
-          });
+      console.log("Response data:", data);
+
+      if (data.error) {
+        console.error("Server error:", data.error);
+        setErrorMessage(data.error);
+      } else if (data.message) {
+        console.error("Registration error:", data.message);
+        setErrorMessage(data.message);
+      } else if (data.status) {
+        console.log("Registration successful:", data.user);
+        setSuccessModalOpen(true);
       }
     } catch (error) {
-      console.error("Помилка при перевірці існування імейла:", error);
+      console.error("Error during registration:", error);
     }
   }
+  useEffect(() => {}, [isSuccessModalOpen, router]);
+
+  const redirectToDashboard = () => {
+    router.push("/");
+  };
 
   return (
     <Layout>
@@ -78,7 +88,7 @@ export default function Register() {
         <title>Реєстрація</title>
       </Head>
 
-      <section className="w-3/4 mx-auto flex flex-col gap-10 ">
+      <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
           <h1 className="text-gray-800 text-4xl font-bold py-4">
             Реєстрація <br />
@@ -93,6 +103,7 @@ export default function Register() {
 
         {/* form */}
         <form className="flex flex-col gap-2" onSubmit={formik.handleSubmit}>
+          {errorMessage && <div className="text-red-500">{errorMessage}</div>}
           <div
             className={`${styles.input_group} ${
               formik.errors.username && formik.touched.username
@@ -101,8 +112,9 @@ export default function Register() {
             }`}
           >
             <input
+              autoComplete="username"
               type="text"
-              name="Username"
+              name="username"
               placeholder="Користувач"
               className={styles.input_text}
               {...formik.getFieldProps("username")}
@@ -124,6 +136,7 @@ export default function Register() {
             }`}
           >
             <input
+              autoComplete="email"
               type="email"
               name="email"
               placeholder="Email"
@@ -201,14 +214,28 @@ export default function Register() {
           </div>
         </form>
 
-        {/* bottom */}
         <p className="text-center text-gray-400 ">
           Вже маєш аккаунт?{" "}
-          <Link legacyBehavior href={"/login"}>
-            <a className="text-blue-700">Увійти</a>
+          <Link href={"/login"} className="text-blue-700">
+            Увійти
           </Link>
         </p>
       </section>
+
+      {/* Модальне вікно успішної реєстрації */}
+      {isSuccessModalOpen && (
+        <Modal onClose={() => redirectToDashboard()}>
+          <p className="text-2xl pt-7 font-bold mb-4">
+            Вітаємо! Ви успішно зареєструвалися!
+          </p>
+          <button
+            onClick={() => redirectToDashboard()}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+            OK
+          </button>
+        </Modal>
+      )}
     </Layout>
   );
 }

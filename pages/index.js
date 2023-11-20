@@ -44,9 +44,9 @@ function Guest() {
 // Authorize User
 function User({ session, handleSignOut, userCount, users }) {
   return (
-    <main className="container mx-auto text-center py-20 bg-gray-100 rounded-lg shadow-md p-8">
+    <main className="container mx-auto text-center py-20 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg shadow-md p-8">
       <h3 className="text-4xl font-bold text-indigo-600 mb-4">
-        Вітаю, {session.user.name}!
+        Вітаю, <span className="text-amber-400">{session.user.name}</span>!
       </h3>
 
       <div className="details mt-4">
@@ -56,15 +56,20 @@ function User({ session, handleSignOut, userCount, users }) {
 
       <p className="mt-6 text-gray-800 text-xl flex items-center justify-center">
         Загальна кількість користувачів{" "}
-        <span className="font-bold text-indigo-500 ml-2 mr-2">Kokorooz</span>{" "}
+        <span className="font-bold text-2xl text-amber-400 ml-2 mr-2">
+          Kokorooz
+        </span>{" "}
         <Image
           alt="smile"
           className="mr-2"
           src={"/assets/smile.svg"}
           width={30}
           height={30}
-        />{" "}
-        : {userCount}
+        />
+        :{" "}
+        <span className="text-lime-300 text-2xl font-bold">
+          &nbsp;{userCount}
+        </span>
       </p>
 
       <div className="user-list mt-6">

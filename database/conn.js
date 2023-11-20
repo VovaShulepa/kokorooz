@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 
 const connectMongo = async () => {
   try {
+    mongoose.set("strictQuery", false);
     const { connection } = await mongoose.connect(process.env.MONGO_URL);
+
+    console.log(connectMongo);
 
     if (connection.readyState === 1) {
       return Promise.resolve(true);
@@ -10,6 +13,7 @@ const connectMongo = async () => {
   } catch (error) {
     return Promise.reject(error);
   }
+  console.log(connectMongo);
 };
 
 export default connectMongo;

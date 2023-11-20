@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 export default function Login() {
   const [show, setShow] = useState(false);
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
   // formik hook
   const formik = useFormik({
     initialValues: {
@@ -24,6 +25,7 @@ export default function Login() {
   });
 
   async function onSubmit(values) {
+    setErrorMessage("");
     const status = await signIn("credentials", {
       redirect: false,
       email: values.email,
@@ -31,7 +33,12 @@ export default function Login() {
       callbackUrl: "/",
     });
 
-    if (status.ok) router.push(status.url);
+    if (status.ok) {
+      router.push(status.url);
+    } else {
+      // Відображення помилкового повідомлення для користувача
+      formik.setFieldError("password", "Неправильна пошта або пароль!");
+    }
   }
 
   // Google Handler function
@@ -47,7 +54,7 @@ export default function Login() {
 
       <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
-          <h1 className="text-gray-800 text-4xl font-bold py-4">
+          <h1 className="text-gray-800 text-4xl font-bold py-4 flex justify-center items-center">
             <Image
               alt="smile"
               className="mr-2"
@@ -68,6 +75,9 @@ export default function Login() {
 
         {/* form */}
         <form className="flex flex-col gap-2" onSubmit={formik.handleSubmit}>
+          {errorMessage && (
+            <div className="text-red-500 text-center my-4">{errorMessage}</div>
+          )}
           <div
             className={`${styles.input_group} ${
               formik.errors.email && formik.touched.email
