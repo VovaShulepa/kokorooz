@@ -26,11 +26,12 @@ export default function Login() {
 
   async function onSubmit(values) {
     setErrorMessage("");
+
     const status = await signIn("credentials", {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: "/",
+      callbackUrl: "https://my-kokorooz.vercel.app",
     });
 
     if (status.ok) {
