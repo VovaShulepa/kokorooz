@@ -49,7 +49,7 @@ export default function Login() {
   async function handleGoogleSignin() {
     console.log("Handle Google Signin called");
     const result = await signIn("google", {
-      callbackUrl: "http://localhost:3000",
+      callbackUrl: "https://my-kokorooz.vercel.app",
     });
     console.log("Google Signin result:", result);
   }

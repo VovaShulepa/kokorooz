@@ -10,6 +10,7 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
+      callbackUrl: "https://my-kokorooz.vercel.app/api/auth/callback/google",
     }),
 
     CredentialsProvider({
