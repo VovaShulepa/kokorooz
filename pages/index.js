@@ -48,10 +48,40 @@ function User({ session, handleSignOut, userCount, users }) {
       <h3 className="text-4xl font-bold text-indigo-600 mb-4">
         Вітаю, <span className="text-amber-400">{session.user.name}</span>!
       </h3>
-
+      {/* DOWNLOAD_APP */}
+      <p className=" mx-auto text-gray-800 font-bold mt-3 mb-3">
+        Download our App
+      </p>
+      <div className="flex justify-center space-x-4 z-50">
+        <a
+          href="https://apps.apple.com/gb/app/tinder-dating-chat-friends/id547702041"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/assets/app_store.svg"
+            alt="App Store"
+            width={120}
+            height={35}
+          />
+        </a>
+        <a
+          href="https://play.google.com/store/apps/details?id=com.tinder&hl=en_US&gl=US"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/assets/google_play.svg"
+            alt="Google Play"
+            width={120}
+            height={35}
+          />
+        </a>
+      </div>
+      {/* DOWNLOAD_APP */}
       <div className="details mt-4">
-        <h5 className="text-2xl font-semibold">{session.user.name}</h5>
-        <h5 className="text-lg">{session.user.email}</h5>
+        {/* <h5 className="text-2xl font-semibold">Login: {session.user.name}</h5> */}
+        <h5 className="text-lg">Email: {session.user.email}</h5>
       </div>
 
       <p className="mt-6 text-gray-800 text-xl flex items-center justify-center">

@@ -15,10 +15,10 @@ export default async function handler(req, res) {
 
       const checkExisting = await Users.findOne({ email });
       if (checkExisting) {
-        console.error("Користувач з таким email вже існує.");
+        console.error("User with this email already exists.");
         return res
           .status(422)
-          .json({ message: "Користувач з таким email вже існує." });
+          .json({ message: "User with this email already exists." });
       }
 
       const hashedPassword = await hash(password, 12);

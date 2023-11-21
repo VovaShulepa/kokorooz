@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { registerValidate } from "../lib/validate";
 import { useRouter } from "next/router";
-
+import Image from "next/image";
 const Modal = ({ children, onClose }) => {
   return (
     <div
@@ -85,20 +85,51 @@ export default function Register() {
   return (
     <Layout>
       <Head>
-        <title>Реєстрація</title>
+        <title>Registration</title>
       </Head>
 
       <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
           <h1 className="text-gray-800 text-4xl font-bold py-4">
-            Реєстрація <br />
+            Registration <br />
           </h1>
 
           <p className="w-3/4 mx-auto text-gray-400">
-            Знайди свою половинку ❤️ &#128152; <br />
-            Реєструйся отримай 2$ на карту. <br />
-            Запроси друга отримай 1$
+            Find Your Love ❤️ &#128152; <br />
+            Register and get $2 on your card. <br />
+            Invite a friend and get $1.
           </p>
+          {/* DOWNLOAD_APP */}
+          <p className=" mx-auto text-gray-800 font-bold mt-3 mb-3">
+            Download our App
+          </p>
+          <div className="flex justify-center space-x-4 z-50">
+            <a
+              href="https://apps.apple.com/gb/app/tinder-dating-chat-friends/id547702041"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/assets/app_store.svg"
+                alt="App Store"
+                width={120}
+                height={40}
+              />
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.tinder&hl=en_US&gl=US"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/assets/google_play.svg"
+                alt="Google Play"
+                width={120}
+                height={40}
+              />
+            </a>
+          </div>
+          {/* DOWNLOAD_APP */}
         </div>
 
         {/* form */}
@@ -115,7 +146,7 @@ export default function Register() {
               autoComplete="username"
               type="text"
               name="username"
-              placeholder="Користувач"
+              placeholder="Username"
               className={styles.input_text}
               {...formik.getFieldProps("username")}
             />
@@ -162,7 +193,7 @@ export default function Register() {
             <input
               type={`${show.password ? "text" : "password"}`}
               name="password"
-              placeholder="Пароль"
+              placeholder="Password"
               className={styles.input_text}
               {...formik.getFieldProps("password")}
             />
@@ -189,7 +220,7 @@ export default function Register() {
             <input
               type={`${show.cpassword ? "text" : "password"}`}
               name="cpassword"
-              placeholder="Повторіть пароль"
+              placeholder="Confirm password"
               className={styles.input_text}
               {...formik.getFieldProps("cpassword")}
             />
@@ -209,15 +240,15 @@ export default function Register() {
           {/* login buttons */}
           <div className="input-button">
             <button type="submit" className={styles.button}>
-              Зареєструватись
+              Register
             </button>
           </div>
         </form>
 
         <p className="text-center text-gray-400 ">
-          Вже маєш аккаунт?{" "}
-          <Link href={"/login"} className="text-blue-700">
-            Увійти
+          Already have an account?{" "}
+          <Link href={"/login"} className="text-blue-700 hover:text-blue-400">
+            Login
           </Link>
         </p>
       </section>
@@ -226,7 +257,7 @@ export default function Register() {
       {isSuccessModalOpen && (
         <Modal onClose={() => redirectToDashboard()}>
           <p className="text-2xl pt-7 font-bold mb-4">
-            Вітаємо! Ви успішно зареєструвалися!
+            Congratulations! You have successfully registered! &#127881;
           </p>
           <button
             onClick={() => redirectToDashboard()}

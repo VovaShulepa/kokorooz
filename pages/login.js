@@ -37,10 +37,10 @@ export default function Login() {
       router.push(status.url);
     } else {
       if (status.error === "No user found with this email. Please sign up!") {
-        formik.setFieldError("email", "Користувача з такою поштою не існує");
+        formik.setFieldError("email", "No user found with this email");
       } else {
         // Displaying a generic error message for other errors
-        formik.setFieldError("password", "Неправильна пошта або пароль!");
+        formik.setFieldError("password", "Incorrect email or password");
       }
     }
   }
@@ -63,7 +63,7 @@ export default function Login() {
       <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
           <h1 className="text-gray-800 text-4xl font-bold py-4 flex justify-center items-center">
-            Увійти{" "}
+            Log In{" "}
             <Image
               alt="corn"
               className="mr-2"
@@ -73,9 +73,40 @@ export default function Login() {
             />
           </h1>
           <p className="w-3/4 mx-auto text-gray-400">
-            Реєструйся отримай 2$ на карту. <br />
-            Запроси друга отримай 1$
+            Register now to receive a $2 bonus on your card.Invite a friend and
+            get an extra $1! Download the app and cash in today! 💳💸
           </p>
+          {/* DOWNLOAD_APP */}
+          <p className=" mx-auto text-gray-800 font-bold mt-3 mb-3">
+            Download our App
+          </p>
+          <div className="flex justify-center space-x-4 z-50">
+            <a
+              href="https://apps.apple.com/gb/app/tinder-dating-chat-friends/id547702041"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/assets/app_store.svg"
+                alt="App Store"
+                width={120}
+                height={40}
+              />
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.tinder&hl=en_US&gl=US"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/assets/google_play.svg"
+                alt="Google Play"
+                width={120}
+                height={40}
+              />
+            </a>
+          </div>
+          {/* DOWNLOAD_APP */}
         </div>
 
         {/* form */}
@@ -117,7 +148,7 @@ export default function Login() {
             <input
               type={`${show ? "text" : "password"}`}
               name="password"
-              placeholder="Пароль"
+              placeholder="Password"
               className={styles.input_text}
               {...formik.getFieldProps("password")}
             />
@@ -137,7 +168,7 @@ export default function Login() {
 
           <div className="input-button">
             <button type="submit" className={styles.button}>
-              Увійти
+              Login
             </button>
           </div>
           <div className="input-button">
@@ -146,7 +177,7 @@ export default function Login() {
               onClick={handleGoogleSignin}
               className={styles.button_custom}
             >
-              Увійти з Google{" "}
+              Sign in with Google{" "}
               <Image
                 src={"/assets/google.svg"}
                 alt="google"
@@ -158,9 +189,9 @@ export default function Login() {
         </form>
 
         <p className="text-center text-gray-400 ">
-          Ще не зареєстрований(на)?{" "}
+          Not registered yet?{" "}
           <Link legacyBehavior href={"/register"}>
-            <a className="text-blue-700">Зареєструватись</a>
+            <a className="text-blue-700 hover:text-blue-400">Register</a>
           </Link>
         </p>
       </section>
