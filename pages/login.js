@@ -78,7 +78,7 @@ export default function Login() {
           </p>
           {/* DOWNLOAD_APP */}
           <p className=" mx-auto text-gray-800 font-bold mt-3 mb-3">
-            Download our App
+            Download App
           </p>
           <div className="flex justify-center space-x-4 z-50">
             <a
