@@ -60,7 +60,7 @@ export default function Login() {
     console.log("Handle Google Signin called");
     try {
       const result = await signIn("google", {
-        callbackUrl: "http://localhost:3000",
+        callbackUrl: "https://my-kokorooz.netlify.app",
       });
       console.log("Google Signin result:", result);
     } catch (error) {
