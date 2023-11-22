@@ -10,7 +10,7 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackUrl: "http://localhost:3000/api/auth/callback/google",
+      callbackUrl: "https://my-kokorooz.netlify.app/auth/callback/google",
     }),
 
     CredentialsProvider({
