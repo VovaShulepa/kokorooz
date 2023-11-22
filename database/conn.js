@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const connectMongo = async () => {
   try {
     mongoose.set("strictQuery", false);
-    const { connection } = await mongoose.connect(process.env.MONGO_URL);
+    // const { connection } = await mongoose.connect(process.env.MONGO_URL);
+    const { connection } = await mongoose.connect(process.env.MONGO_URI);
 
     console.log(connectMongo);
 

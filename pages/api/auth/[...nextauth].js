@@ -10,14 +10,14 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackUrl: "https://my-kokorooz.vercel.app/api/auth/callback/google",
+      callbackUrl: "http://localhost:3000/api/auth/callback/google",
     }),
 
     CredentialsProvider({
       name: "Credentials",
       authorize: async (credentials, req) => {
         try {
-          await connectMongo(); // Використовуйте try-catch для обробки помилок підключення
+          await connectMongo();
 
           if (credentials.provider === "google") {
             const googleUser = await fetch(
@@ -37,12 +37,13 @@ export default NextAuth({
               const newUser = new Users({
                 username: googleUser.name,
                 email: googleUser.email,
-                // інші дані, які ви хочете зберегти
               });
               await newUser.save();
             }
           } else {
             const result = await Users.findOne({ email: credentials.email });
+            console.log("User found:", result);
+
             if (!result) {
               throw new Error("No user found with this email. Please sign up!");
             }

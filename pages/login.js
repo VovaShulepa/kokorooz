@@ -25,34 +25,47 @@ export default function Login() {
   });
 
   async function onSubmit(values) {
+    console.log("Form values:", values);
     setErrorMessage("");
 
-    const status = await signIn("credentials", {
-      redirect: false,
-      email: values.email,
-      password: values.password,
-      callbackUrl: "https://my-kokorooz.vercel.app",
-    });
+    try {
+      const status = await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+        callbackUrl: "/",
+      });
 
-    if (status.ok) {
-      router.push(status.url);
-    } else {
-      if (status.error === "No user found with this email. Please sign up!") {
-        formik.setFieldError("email", "No user found with this email");
+      console.log("Authentication status:", status);
+
+      if (status.ok) {
+        console.log("Redirecting to:", status.url);
+        router.push(status.url);
       } else {
-        // Displaying a generic error message for other errors
-        formik.setFieldError("password", "Incorrect email or password");
+        console.error("Authentication failed:", status.error);
+        if (status.error === "No user found with this email. Please sign up!") {
+          formik.setFieldError("email", "No user found with this email");
+        } else {
+          formik.setFieldError("password", "Incorrect email or password");
+        }
       }
+    } catch (error) {
+      console.error("Error during authentication:", error);
+      setErrorMessage("Error during authentication. Please try again.");
     }
   }
 
   // Google Handler function
   async function handleGoogleSignin() {
     console.log("Handle Google Signin called");
-    const result = await signIn("google", {
-      callbackUrl: "https://my-kokorooz.vercel.app",
-    });
-    console.log("Google Signin result:", result);
+    try {
+      const result = await signIn("google", {
+        callbackUrl: "http://localhost:3000",
+      });
+      console.log("Google Signin result:", result);
+    } catch (error) {
+      console.error("Google Signin error:", error);
+    }
   }
 
   return (

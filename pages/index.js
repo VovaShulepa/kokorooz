@@ -62,8 +62,8 @@ function User({ session, handleSignOut, userCount, users }) {
             src="/assets/app_store.svg"
             alt="App Store"
             width={120}
-            height={35}
-          />
+            height={40}
+          ></Image>
         </a>
         <a
           href="https://play.google.com/store/apps/details?id=com.tinder&hl=en_US&gl=US"
@@ -74,7 +74,7 @@ function User({ session, handleSignOut, userCount, users }) {
             src="/assets/google_play.svg"
             alt="Google Play"
             width={120}
-            height={35}
+            height={40}
           />
         </a>
       </div>
