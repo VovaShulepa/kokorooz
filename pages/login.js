@@ -55,12 +55,11 @@ export default function Login() {
     }
   }
 
-  // Google Handler function
   async function handleGoogleSignin() {
     console.log("Handle Google Signin called");
     try {
       const result = await signIn("google", {
-        callbackUrl: "https://my-kokorooz.netlify.app",
+        callbackUrl: "https://my-kokorooz.netlify.app/api/auth/callback/google",
       });
       console.log("Google Signin result:", result);
     } catch (error) {
