@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getSession, useSession, signOut } from "next-auth/react";
 import connectMongo from "../database/conn";
 import Users from "../model/Schema";
+import Layout from "../layout/layout";
 
 export default function Home({ userCount, users }) {
   const { data: session } = useSession();
@@ -14,7 +15,9 @@ export default function Home({ userCount, users }) {
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`bg-gradient-to-r from-violet-500 to-fuchsia-500 ${styles.container}`}
+    >
       <Head>
         <title>Домашня Сторінка</title>
       </Head>
@@ -27,7 +30,7 @@ export default function Home({ userCount, users }) {
 // Guest
 function Guest() {
   return (
-    <main className="container mx-auto text-center py-20 bg-gradient-to-r from-violet-500 to-fuchsia-500">
+    <main className="container mx-auto text-center py-20">
       <h3 className="text-4xl font-bold">Guest Homepage</h3>
 
       <div className="flex justify-center">
@@ -44,7 +47,7 @@ function Guest() {
 // Authorize User
 function User({ session, handleSignOut, userCount, users }) {
   return (
-    <main className="container mx-auto text-center py-20 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg shadow-md p-8">
+    <main className="container mx-auto text-center py-20">
       <h3 className="text-4xl font-bold text-indigo-600 mb-4">
         Вітаю, <span className="text-amber-400">{session.user.name}</span>!
       </h3>
