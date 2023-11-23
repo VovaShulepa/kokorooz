@@ -54,12 +54,12 @@ export default function Login() {
       setErrorMessage("Error during authentication. Please try again.");
     }
   }
-
+  // test
   async function handleGoogleSignin() {
     console.log("Handle Google Signin called");
     try {
       const result = await signIn("google", {
-        callbackUrl: "https://my-kokorooz.netlify.app/api/auth/callback/google",
+        callbackUrl: "https://my-kokorooz.vercel.app",
       });
       console.log("Google Signin result:", result);
     } catch (error) {
