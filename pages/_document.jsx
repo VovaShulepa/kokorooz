@@ -7,8 +7,8 @@ export default class MyDocument extends Document {
         <Head>
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
 
-          <meta property="og:site_name" content="Max&O" />
-          <meta property="og:title" content="Kokorooz dating app" />
+          <meta property="og:site_name" content="Kokorooz" />
+          <meta property="og:title" content="Find Your Love❤️ &#128152;" />
           <meta property="og:description" content="Kokorooz dating app" />
           <meta name="description" content="Kokorooz dating app" />
           <meta
