@@ -48,9 +48,6 @@ export default class MyDocument extends Document {
           />
           <link rel="manifest" href="/favicon/site.webmanifest" />
           <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" />
-
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
         </Head>
 
         <body>
