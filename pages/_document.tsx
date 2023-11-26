@@ -8,10 +8,13 @@ export default class MyDocument extends Document {
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
 
           <meta property="og:site_name" content="Kokorooz App" />
-          <meta property="og:title" content="Адвокатське об’єднання Max&O" />
+          <meta
+            property="og:title"
+            content="Просто хочеш спілкуватися? Не проблема. Шукаєш другу половинку? Чудово!"
+          />
           <meta
             property="og:description"
-            content="Kokorooz– is a dating app to find a proposal from girls or boys in your city."
+            content="Стань частиною Kokorooz і отримуй $2 за нового друга та $1 за кожен пост! Тут кожен знайомчик - цінний. Давайте знайомитись та заробляти разом!"
           />
           <meta
             name="description"
