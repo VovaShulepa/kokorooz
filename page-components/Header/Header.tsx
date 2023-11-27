@@ -77,7 +77,7 @@ export const Header = () => {
                   href=""
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="btn-gradient bg-[#3fb22a]  rounded-full block text-center text-black px-6 py-2 text-[15px] hover:text-white  hover:scale-[.96]  duration-300"
+                  className="btn-gradient bg-[#3fb22a]  rounded-full  text-center text-black px-6 py-2 text-[15px] hover:text-white  hover:scale-[.96]  duration-300"
                 >
                   Увійти
                 </Link>

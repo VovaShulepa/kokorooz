@@ -28,7 +28,7 @@ const Home: NextPage = () => {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
 
-        <title>KokoRooz</title>
+        <title>Kokorooz</title>
       </Head>
       <Header />
       <Hero />
