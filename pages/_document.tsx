@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
           />
           <meta
             name="description"
-            content="Kokorooz– is a dating app to find a proposal from girls or boys in your city."
+            content="Kokorooz. Стань частиною Kokorooz і отримуй $2 за нового друга та $1 за кожен пост! Тут кожен знайомчик - цінний. Давайте знайомитись та заробляти разом!"
           />
           <meta
             property="og:image"
