@@ -41,6 +41,7 @@ export const MenuModal: FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
               >
                 <Dialog.Panel className="transform overflow-hidden transition-all flex relative mx-auto w-full">
                   <button
+                    name="close"
                     type="button"
                     className="absolute top-7 right-8 border-none outline-none bg-transparent focus-visible:border-none"
                     onClick={closeModal}

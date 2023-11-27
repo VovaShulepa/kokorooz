@@ -110,7 +110,7 @@ export const Hero = () => {
                     href="https://apps.apple.com/gb/app/tinder-dating-chat-friends/id547702041"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:scale-105 duration-300"
+                    className="hover:scale-[1.02] duration-300"
                   >
                     <Image
                       src="/app_store.svg"
@@ -124,7 +124,7 @@ export const Hero = () => {
                     href="https://play.google.com/store/apps/details?id=com.tinder&hl=en_US&gl=US"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:scale-105 duration-300"
+                    className="hover:scale-[1.02]  duration-300"
                   >
                     <Image
                       src="/google_play.svg"

@@ -10,10 +10,10 @@ const Custom404: NextPage = () => {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <section>
+      <section className="bg-slate-500">
         <div className="container">
-          <h2>Сторінка, яку ви шукали - ще не створена</h2>
-          <a href={routes.HOME}>На головну</a>
+          <h2 className="text-red">Сторінка, яку ви шукали - ще не створена</h2>
+          <a href="/home">На головну</a>
         </div>
       </section>
     </>

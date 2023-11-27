@@ -1,13 +1,16 @@
-import { Section } from '@/components/common/Section';
-import { Paragraph } from '@/components/typography/Paragraph';
-import { Title } from '@/components/typography/Title';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Section } from '@/components/common/Section';
+import { Paragraph } from '@/components/typography/Paragraph';
+import { Title } from '@/components/typography/Title';
+import { Animation } from '../Animation/Animation';
+
 export const Action = () => {
   return (
-    <Section className="pt-20 pb-24 action-section">
-      <div className="container">
+    // <Section className="pt-20 pb-24 action-section">
+    <Section className="pt-20 pb-24 action-section relative ">
+      <div className="container relative z-10">
         <div className="xl:flex xl:items-center xl:justify-around">
           <Image
             data-aos="flip-down"
@@ -18,10 +21,11 @@ export const Action = () => {
             width={300}
             height={300}
             className="action-mobile notXl:mx-auto notXl:mb-8 xl:w-[408px] object-cover"
-          ></Image>
+          />
+
           <div>
             <Title tag="h2" className="mb-3 xl:mb-8 notXl:text-center">
-              Знайди тих, хто шукає те саме, що й Ти
+              Знайди тих, хто шукає Тебе
             </Title>
 
             <Paragraph className="mb-4 xl:mb-6 xl:w-[480px] notXl:text-center">
@@ -44,6 +48,7 @@ export const Action = () => {
           </div>
         </div>
       </div>
+      <Animation />
     </Section>
   );
 };

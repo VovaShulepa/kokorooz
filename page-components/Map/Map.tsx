@@ -10,7 +10,7 @@ export const Map = () => {
       <div className="container ">
         <div className="flex flex-col">
           <Title tag="h2" className="text-center mb-8 xl:mb-14">
-            Знайди нових друзів у своєму місті
+            Нові друзі у твоєму місті
             {/* <Image
               src="/map-pin.png"
               alt="app screenshots"
@@ -41,17 +41,17 @@ export const Map = () => {
           </div>
           <div className="xl:flex justify-between">
             <div className="notXl:text-center max-w-[500px]" data-aos="zoom-in">
-              <Paragraph className="mb-6" data-aos="zoom-in">
-                Стань частиною Kokorooz і отримуй $2 за нового друга та $1 за
-                кожен пост! Тут кожен знайомчик - цінний. Давайте знайомитись та
-                заробляти разом!
-              </Paragraph>
               <Paragraph
                 className="notXl:text-center max-w-[500px]"
                 data-aos="zoom-in"
               >
                 Kokorooz - місце для креативних зустрічей, кохання та дружби.
                 Простий та захоплюючий додаток для всіх!
+              </Paragraph>
+              <Paragraph className="mb-6" data-aos="zoom-in">
+                Стань частиною Kokorooz і отримуй $2 за нового друга та $1 за
+                кожен пост! Тут кожен знайомчик - цінний. Давайте знайомитись та
+                заробляти разом!
               </Paragraph>
 
               <div

@@ -28,7 +28,7 @@ export const FeedBack = () => {
   };
 
   return (
-    <Section className="pt-20 mb-20" id="feedback">
+    <Section className="pt-20 mb-20 z-10" id="feedback">
       <div className="container">
         <Title tag="h2" className="mb-4 xl:mb-12 text-center">
           Відгуки Юзерів
@@ -40,7 +40,7 @@ export const FeedBack = () => {
           wrapperTag="ul"
           grabCursor
           loop
-          speed={1000}
+          speed={500}
           pagination={{
             clickable: true,
           }}

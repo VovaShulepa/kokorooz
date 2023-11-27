@@ -14,15 +14,9 @@ export const Header = () => {
       <div className="container py-3">
         <div className="flex flex-row justify-between items-center">
           <Link href="/">
-            <span
-              className="flex text-2xl font-bold items-center text-white"
-              data-aos="flip-down"
-              data-aos-easing="ease-out-cubic"
-            >
+            <span className="flex text-2xl font-bold items-center text-white">
               KOK
               <Image
-                data-aos="flip-up"
-                data-aos-easing="ease-out-cubic"
                 src="/smile.png"
                 alt="app screenshots"
                 quality={100}
@@ -45,7 +39,7 @@ export const Header = () => {
                 <Link href="/">Головна</Link>
               </li>
               <li className="py-1 hover:translate-y-1 duration-300 hover:text-yellow-300">
-                <Link href="/">Відгуки</Link>
+                <Link href="#feedback">Відгуки</Link>
               </li>
 
               <li className="py-1 hover:translate-y-1 duration-300 hover:text-yellow-300">
@@ -74,10 +68,10 @@ export const Header = () => {
               </li>
               <li>
                 <Link
-                  href=""
+                  href="/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="btn-gradient bg-[#3fb22a]  rounded-full  text-center text-black px-6 py-2 text-[15px] hover:text-white  hover:scale-[.96]  duration-300"
+                  className="btn-gradient bg-[#3fb22a] block rounded-full  text-center text-black px-6 py-2 text-[15px] hover:text-white  hover:scale-[.96]  duration-300"
                 >
                   Увійти
                 </Link>
