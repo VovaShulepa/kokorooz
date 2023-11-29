@@ -13,8 +13,8 @@ export const Paragraph: FC<ParagraphProps> = ({
       className={cn(
         'font-light',
         {
-          'text-xl xl:text-[24px] font-normal': size === 'big',
-          'text-sm md:text-base': size === 'small',
+          'text-xl xl:text-[24px] font-normal text-slate-400': size === 'big',
+          'text-sm md:text-base text-slate-400': size === 'small',
         },
         className,
       )}

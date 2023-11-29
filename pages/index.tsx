@@ -12,6 +12,7 @@ import { FeedBack } from '@/page-components/Feedback/Feedback';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import ScrollUp from '@/components/common/ScrollUp/ScrollUp';
+import { Faq } from '@/page-components/Faq/Faq';
 
 const Home: NextPage = () => {
   useEffect(() => {
@@ -35,6 +36,7 @@ const Home: NextPage = () => {
       <Action />
       <Map />
       <FeedBack />
+      <Faq />
       <Footer />
       <ScrollUp />
     </>
