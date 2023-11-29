@@ -6,8 +6,17 @@ import 'swiper/css/pagination';
 import '@/styles/globals.css';
 import 'aos/dist/aos.css';
 
+import { Header } from '@/page-components/Header/Header';
+import { Footer } from '@/page-components/Footer/Footer';
+
 const App = ({ Component, pageProps = {} }: AppProps) => {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Header />
+      <Component {...pageProps} />
+      <Footer />
+    </>
+  );
 };
 
 export default App;

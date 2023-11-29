@@ -4,9 +4,7 @@ import Head from 'next/head';
 
 import { Hero } from '@/page-components/Hero/Hero';
 import { Map } from '@/page-components/Map/Map';
-import { Header } from '@/page-components/Header/Header';
 import { Action } from '@/page-components/Action/Action';
-import { Footer } from '@/page-components/Footer/Footer';
 import { FeedBack } from '@/page-components/Feedback/Feedback';
 
 import 'aos/dist/aos.css';
@@ -31,13 +29,11 @@ const Home: NextPage = () => {
 
         <title>Kokorooz</title>
       </Head>
-      <Header />
       <Hero />
       <Action />
       <Map />
       <FeedBack />
       <Faq />
-      <Footer />
       <ScrollUp />
     </>
   );

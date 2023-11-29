@@ -13,7 +13,7 @@ export const Footer = () => {
 
   const currentYear = getCurrentYear();
   return (
-    <footer className="footer container rounded-3xl" id="footer">
+    <footer className="footer container rounded-3xl mt-auto mb-4" id="footer">
       <div className="container py-8">
         <div className="flex xl:justify-around notXl:flex-col gap-4 xl:gap-14">
           <div className=" notXl:mx-auto">
@@ -120,9 +120,9 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-4 mb-4">
-        <p className="text-xs leading-5 text-gray-400 mb-6">
-          Copyright © {currentYear} UI8 LLC. All rights reserved
+      <div className="flex justify-center mb-4">
+        <p className="text-xs leading-5 text-gray-400">
+          Copyright © {currentYear} Kokorooz. All rights reserved
         </p>
       </div>
     </footer>
