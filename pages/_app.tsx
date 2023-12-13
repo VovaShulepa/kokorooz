@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import { SessionProvider } from 'next-auth/react';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -12,9 +13,11 @@ import { Footer } from '@/page-components/Footer/Footer';
 const App = ({ Component, pageProps = {} }: AppProps) => {
   return (
     <>
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+      <SessionProvider session={pageProps.session}>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </SessionProvider>
     </>
   );
 };

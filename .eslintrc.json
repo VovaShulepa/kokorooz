@@ -22,7 +22,8 @@
   "rules": {
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "arrow-body-style": 0,
-    "no-console": ["error", { "allow": ["warn", "error"] }],
+    // "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-console": "off",
     "no-undef": "off"
   }
 }

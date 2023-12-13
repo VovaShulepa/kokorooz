@@ -22,7 +22,7 @@ export const Map = () => {
           <div className="flex xl:hidden" data-aos="zoom-in">
             <div className="relative">
               <Image
-                src="/map.jpg"
+                src="/map.jpeg"
                 alt="app screenshots"
                 className="mb-8 map w-full rounded-3xl object-cover block"
                 quality={100}
@@ -59,7 +59,7 @@ export const Map = () => {
                 data-aos="flip-left"
               >
                 <Link
-                  href=""
+                  href="/register"
                   rel="noopener noreferrer"
                   target="_blank"
                   className="button btn-gradient bg-[#3fb22a] block rounded-full text-center text-white max-w-[240px] px-6 py-3 text-[22px] hover:text-black hover:scale-[.96] duration-300"
@@ -71,7 +71,7 @@ export const Map = () => {
             <div className="notXl:hidden" data-aos="zoom-in">
               <div className="relative">
                 <Image
-                  src="/map.jpg"
+                  src="/map.jpeg"
                   alt="app map"
                   className="map mb-8 w-full xl:max-w-[600px] rounded-3xl object-cover "
                   quality={100}

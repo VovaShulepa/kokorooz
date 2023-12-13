@@ -6,7 +6,6 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -22,7 +21,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "noEmit": true
   },
   "include": [
     "next-env.d.ts",
@@ -31,7 +31,10 @@
     "pages/api/sendMail.js",
     "components/Form/index.js",
     "utils/schema.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "pages/api/auth/[...nextauth].js",
+    "pages/api/auth/signup.js",
+    "pages/user.tsx"
   ],
   "exclude": ["node_modules"]
 }

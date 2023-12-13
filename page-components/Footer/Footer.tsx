@@ -69,7 +69,7 @@ export const Footer = () => {
             <p className="text-center font-bold mb-3">Завантажити:</p>
             <div className="flex flex-col justify-center items-center gap-2 xl:gap-3">
               <a
-                href="https://apps.apple.com/gb/app/tinder-dating-chat-friends/id547702041"
+                href="/soon"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:scale-[1.02]  duration-300"
@@ -83,7 +83,7 @@ export const Footer = () => {
                 />
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.tinder&hl=en_US&gl=US"
+                href="/soon"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:scale-[1.02] duration-300"

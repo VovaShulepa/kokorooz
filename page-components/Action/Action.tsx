@@ -8,7 +8,6 @@ import { Animation } from '../Animation/Animation';
 
 export const Action = () => {
   return (
-    // <Section className="pt-20 pb-24 action-section">
     <Section className="pt-20 pb-24 action-section relative ">
       <div className="container relative z-10">
         <div className="xl:flex xl:items-center xl:justify-around">
@@ -37,7 +36,7 @@ export const Action = () => {
               data-aos="flip-left"
             >
               <Link
-                href=""
+                href="/register"
                 rel="noopener noreferrer"
                 target="_blank"
                 className="button btn-gradient bg-[#3fb22a] block rounded-full text-center text-white max-w-[240px] px-6 py-3 text-[22px] hover:text-black hover:scale-[.96] duration-300"

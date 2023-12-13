@@ -66,12 +66,11 @@ export const Header = () => {
                   <Instagram className="w-6 h-6 duration-300 hover:fill-yellow-300 hover:scale-110 focus:scale-110" />
                 </Link>
               </li>
-              <li>
+              <li className="block   hover:scale-[.96] duration-300">
                 <Link
-                  href="/"
+                  href="/login"
                   rel="noopener noreferrer"
-                  target="_blank"
-                  className="btn-gradient bg-[#3fb22a] block rounded-full  text-center text-black px-6 py-2 text-[15px] hover:text-white  hover:scale-[.96]  duration-300"
+                  className="btn-gradient bg-[#3fb22a] text-center py-3 px-5 text-black rounded-full hover:text-white "
                 >
                   Увійти
                 </Link>

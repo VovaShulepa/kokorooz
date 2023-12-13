@@ -1,10 +1,10 @@
-import { Section } from '@/components/common/Section';
-import { Paragraph } from '@/components/typography/Paragraph';
-import { Title } from '@/components/typography/Title';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useState, useEffect } from 'react';
+import { Title } from '@/components/typography/Title';
+import { Paragraph } from '@/components/typography/Paragraph';
+import { Section } from '@/components/common/Section';
 
 export const Hero = () => {
   const [activeImage, setActiveImage] = useState(1);
@@ -89,7 +89,7 @@ export const Hero = () => {
             >
               <div>
                 <Link
-                  href=""
+                  href="/register"
                   rel="noopener noreferrer"
                   target="_blank"
                   className="btn-gradient bg-[#3fb22a] notXl:mx-auto rounded-full block text-center text-white max-w-[240px] px-14 py-3 text-[22px] hover:text-black  hover:scale-[.96]  duration-300"
@@ -107,7 +107,7 @@ export const Hero = () => {
                   data-aos="zoom-in"
                 >
                   <a
-                    href="https://apps.apple.com/gb/app/tinder-dating-chat-friends/id547702041"
+                    href="/soon"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:scale-[1.02] duration-300"
@@ -121,7 +121,7 @@ export const Hero = () => {
                     />
                   </a>
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.tinder&hl=en_US&gl=US"
+                    href="/soon"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:scale-[1.02]  duration-300"
