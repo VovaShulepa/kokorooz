@@ -39,7 +39,16 @@ export const Hero = () => {
             >
               Кожен Знайомчик - Цінний!
             </Title>
+            <Paragraph className="mb-8 max-w-[500px]" data-aos="zoom-in">
+              🚀 Вітаємо в Kokorooz - де, Ти, можеш знайомитись та знайти
+              підробіток! Запрошуй друзів та отримай{' '}
+              <span className="text-yellow-300">$1</span> за кожного або{' '}
+              <span className="text-yellow-300">$0.50</span> за кожен пост.
+              Стань одним із перших учасників та отримай не лише враження від
+              знайомств, а й приємний дохід!
+            </Paragraph>
 
+            {/* ========== */}
             <div className="mobiles flex xl:hidden relative">
               <div
                 className={`relative ${
@@ -76,12 +85,7 @@ export const Hero = () => {
                 />
               </div>
             </div>
-
-            <Paragraph className="mb-8 max-w-[500px]" data-aos="zoom-in">
-              Стань частиною <span className="text-yellow-300">Kokorooz</span> і
-              отримуй $2 за нового друга та $1 за кожен пост! Тут кожен
-              знайомчик - цінний. Давайте знайомитись та заробляти разом!
-            </Paragraph>
+            {/* ===================== */}
 
             <div
               className="xl:flex items-center justify-between mt-4 mb-4 "
@@ -91,10 +95,9 @@ export const Hero = () => {
                 <Link
                   href="/register"
                   rel="noopener noreferrer"
-                  target="_blank"
                   className="btn-gradient bg-[#3fb22a] notXl:mx-auto rounded-full block text-center text-white max-w-[240px] px-14 py-3 text-[22px] hover:text-black  hover:scale-[.96]  duration-300"
                 >
-                  Реєстрація
+                  Детальніше
                 </Link>
               </div>
               {/* DOWNLOAD_APP */}

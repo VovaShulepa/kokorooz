@@ -122,7 +122,16 @@ export const Footer = () => {
       </div>
       <div className="flex justify-center mb-4">
         <p className="text-xs leading-5 text-gray-400">
-          Copyright © {currentYear} Kokorooz. All rights reserved
+          Copyright © {currentYear} Kokorooz. All rights reserved. Created by{' '}
+          <a
+            href="https://t.me/Shulepchik"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-yellow-300 hover:text-violet-300 hover:underline"
+          >
+            Shulepchik
+          </a>
+          .
         </p>
       </div>
     </footer>

@@ -12,18 +12,18 @@ export default function loginValidate(values: LoginValues) {
   const errors: Partial<LoginValues> = {};
 
   if (!values.email) {
-    errors.email = 'Enter your Email';
+    errors.email = 'Введіть електронну пошту';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid Email address';
+    errors.email = 'Неправильний формат електронної пошти';
   }
 
-  // validation for password
+  // Валідація для пароля
   if (!values.password) {
-    errors.password = 'Enter your Password';
+    errors.password = 'Введіть пароль';
   } else if (values.password.length < 8 || values.password.length > 20) {
-    errors.password = 'Minimum 8 characters and maximum 20 characters';
+    errors.password = 'Мінімум 8 символів та максимум 20 символів';
   } else if (values.password.includes(' ')) {
-    errors.password = 'Invalid Password';
+    errors.password = 'Неправильний пароль';
   }
 
   return errors;
@@ -32,33 +32,33 @@ export default function loginValidate(values: LoginValues) {
 export function registerValidate(values: RegisterValues) {
   const errors: Partial<RegisterValues> = {};
   if (!values.username) {
-    errors.username = 'Enter your Username';
+    errors.username = "Введіть ім'я користувача";
   } else if (/\s/.test(values.username)) {
-    errors.username = 'Spaces are not allowed in the Username';
+    errors.username = 'Пробіли не дозволені в імені користувача';
   }
 
   if (!values.email) {
-    errors.email = 'Enter your Email';
+    errors.email = 'Введіть електронну пошту';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = 'Неправильний формат електронної пошти';
   }
 
-  // validation for password
+  // Валідація для пароля
   if (!values.password) {
-    errors.password = 'Enter your Password';
+    errors.password = 'Введіть пароль';
   } else if (values.password.length < 8 || values.password.length > 20) {
-    errors.password = 'Minimum 8 characters and maximum 20 characters';
+    errors.password = 'Мінімум 8 символів та максимум 20 символів';
   } else if (values.password.includes(' ')) {
-    errors.password = 'Invalid Password';
+    errors.password = 'Неправильний пароль';
   }
 
-  // validate confirm password
+  // Валідація для підтвердження пароля
   if (!values.cpassword) {
-    errors.cpassword = 'Confirm your Password';
+    errors.cpassword = 'Підтвердіть пароль';
   } else if (values.password !== values.cpassword) {
-    errors.cpassword = 'Passwords do not match';
+    errors.cpassword = 'Паролі не збігаються';
   } else if (values.cpassword.includes(' ')) {
-    errors.cpassword = 'Invalid input for the Password';
+    errors.cpassword = 'Неправильний ввід для паролю';
   }
 
   return errors;

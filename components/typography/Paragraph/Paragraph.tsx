@@ -14,6 +14,7 @@ export const Paragraph: FC<ParagraphProps> = ({
         'font-light',
         {
           'text-xl xl:text-[24px] font-normal text-slate-400': size === 'big',
+          'text-xl xl:text-[20px] font-normal text-slate-400': size === 'list',
           'text-sm md:text-base text-slate-400': size === 'small',
         },
         className,
