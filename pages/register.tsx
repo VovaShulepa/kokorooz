@@ -126,155 +126,152 @@ const Register: React.FC = () => {
           </div>
 
           {/* form */}
-          <div className="ml-32">
+          <div className="notXl:mt-16 xl:ml-32">
             <form
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-12 xl:w-[400px]"
               onSubmit={formik.handleSubmit}
             >
-              <div className="flex flex-col xl:w-[400px]">
-                <label htmlFor="username" className="text-base mb-1">
-                  Ім`я користувача
-                </label>
-                <div className="relative flex items-center gap-4">
-                  <input
-                    id="username"
-                    autoComplete="username"
-                    type="text"
-                    placeholder="Логін"
-                    className={`p-2 border w-full rounded-md bg-transparent text-black focus:outline-none ${
-                      formik.errors.username && formik.touched.username
-                        ? 'border-rose-600'
-                        : 'border-gray-300'
-                    }`}
-                    {...formik.getFieldProps('username')}
-                  />
-                </div>
+              {/* Login */}
+              <div className="flex flex-col relative">
+                <input
+                  id="username"
+                  autoComplete="username"
+                  type="text"
+                  placeholder={
+                    formik.errors.username && formik.touched.username
+                      ? formik.errors.username
+                      : 'Логін'
+                  }
+                  className={`input py-3 px-6 text-xl text-yellow-300 border-none w-full rounded-full focus:ring-transparent bg-transparent ${
+                    formik.errors.username && formik.touched.username
+                      ? 'input-error placeholder-red'
+                      : 'border-none'
+                  }`}
+                  {...formik.getFieldProps('username')}
+                />
                 {formik.errors.username && formik.touched.username && (
-                  <span className="text-rose-500">
+                  <span className="absolute text-rose-300 -bottom-8 left-4">
                     {formik.errors.username}
                   </span>
                 )}
               </div>
 
               {/* Електронна пошта */}
-              <div className="flex flex-col">
-                <label htmlFor="email" className="text-base mb-1">
-                  Електронна пошта
-                </label>
-                <div className="relative flex items-center gap-4">
-                  <HiAtSymbol
-                    className="text-gray-500 absolute right-3"
-                    size={20}
-                  />
-                  <input
-                    id="email"
-                    autoComplete="email"
-                    type="email"
-                    placeholder="Email"
-                    className={`p-2 rounded-md bg-transparent text-black focus:outline-none w-full ${
-                      formik.errors.email && formik.touched.email
-                        ? 'border-rose-600'
-                        : 'border-gray-300'
-                    }`}
-                    {...formik.getFieldProps('email')}
-                  />
-                </div>
+              <div className="flex flex-col relative">
+                <input
+                  id="email"
+                  autoComplete="email"
+                  type="email"
+                  placeholder={
+                    formik.errors.email && formik.touched.email
+                      ? formik.errors.email
+                      : 'Email'
+                  }
+                  className={`input py-3 px-6 text-xl text-yellow-300 border-none w-full rounded-full focus:ring-transparent bg-transparent ${
+                    formik.errors.email && formik.touched.email
+                      ? 'input-error placeholder-red'
+                      : 'border-none'
+                  }`}
+                  {...formik.getFieldProps('email')}
+                />
+                <HiAtSymbol
+                  className="text-yellow-300 absolute right-6 top-1/2 transform -translate-y-1/2"
+                  size={20}
+                />
                 {formik.errors.email && formik.touched.email && (
-                  <span className="text-rose-500">{formik.errors.email}</span>
+                  <span className="absolute text-rose-300 -bottom-8 left-4">
+                    {formik.errors.email}
+                  </span>
                 )}
               </div>
 
               {/* Пароль */}
-              <div className="flex flex-col">
-                <label htmlFor="password" className="text-base mb-1">
-                  Пароль
-                </label>
-                <div className="relative flex items-center gap-4">
-                  <input
-                    id="password"
-                    type={show.password ? 'text' : 'password'}
-                    placeholder="Пароль"
-                    autoComplete="current-password"
-                    className={`p-2 border rounded-md bg-transparent w-full text-black focus:outline-none  ${
-                      formik.errors.password && formik.touched.password
-                        ? 'border-rose-600'
-                        : 'border-gray-300'
-                    }`}
-                    {...formik.getFieldProps('password')}
+              <div className="flex flex-col relative">
+                <input
+                  id="password"
+                  type={show.password ? 'text' : 'password'}
+                  placeholder={
+                    formik.errors.password && formik.touched.password
+                      ? formik.errors.password
+                      : 'Пароль'
+                  }
+                  autoComplete="current-password"
+                  className={`input py-3 px-6 text-xl text-yellow-300 border-none w-full rounded-full focus:ring-transparent bg-transparent ${
+                    formik.errors.password && formik.touched.password
+                      ? 'input-error placeholder-red'
+                      : 'border-none'
+                  }`}
+                  {...formik.getFieldProps('password')}
+                />
+                {show.password ? (
+                  <HiEyeOff
+                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    size={20}
+                    onClick={() =>
+                      setShow({ ...show, password: !show.password })
+                    }
                   />
-                  {show.password ? (
-                    <HiEyeOff
-                      className="text-gray-500 cursor-pointer absolute right-3"
-                      size={20}
-                      onClick={() =>
-                        setShow({ ...show, password: !show.password })
-                      }
-                    />
-                  ) : (
-                    <HiEye
-                      className="text-gray-500 cursor-pointer absolute right-3"
-                      size={20}
-                      onClick={() =>
-                        setShow({ ...show, password: !show.password })
-                      }
-                    />
-                  )}
-                </div>
+                ) : (
+                  <HiEye
+                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    size={20}
+                    onClick={() =>
+                      setShow({ ...show, password: !show.password })
+                    }
+                  />
+                )}
                 {formik.errors.password && formik.touched.password && (
-                  <span className="text-rose-500">
+                  <span className="absolute text-rose-300 -bottom-8 left-4">
                     {formik.errors.password}
                   </span>
                 )}
               </div>
 
               {/* Підтвердіть пароль */}
-              <div className="flex flex-col">
-                <label htmlFor="cpassword" className="text-base mb-1">
-                  Підтвердіть пароль
-                </label>
-                <div className="relative flex items-center gap-4">
-                  <input
-                    id="cpassword"
-                    type={show.cpassword ? 'text' : 'password'}
-                    placeholder="Підтвердіть пароль"
-                    className={`p-2 border rounded-md bg-transparent w-full text-black focus:outline-none  ${
-                      formik.errors.cpassword && formik.touched.cpassword
-                        ? 'border-rose-600'
-                        : 'border-gray-300'
-                    }`}
-                    {...formik.getFieldProps('cpassword')}
+              <div className="flex flex-col relative">
+                <input
+                  id="cpassword"
+                  type={show.cpassword ? 'text' : 'password'}
+                  placeholder={
+                    formik.errors.cpassword && formik.touched.cpassword
+                      ? formik.errors.cpassword
+                      : 'Підтвердіть пароль'
+                  }
+                  className={`input py-3 px-6 text-xl text-yellow-300 border-none w-full rounded-full focus:ring-transparent bg-transparent ${
+                    formik.errors.cpassword && formik.touched.cpassword
+                      ? 'input-error placeholder-red'
+                      : 'border-none'
+                  }`}
+                  {...formik.getFieldProps('cpassword')}
+                />
+                {show.cpassword ? (
+                  <HiEyeOff
+                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    size={20}
+                    onClick={() =>
+                      setShow({ ...show, cpassword: !show.cpassword })
+                    }
                   />
-                  {show.cpassword ? (
-                    <HiEyeOff
-                      className="text-gray-500 cursor-pointer absolute right-3"
-                      size={20}
-                      onClick={() =>
-                        setShow({ ...show, cpassword: !show.cpassword })
-                      }
-                    />
-                  ) : (
-                    <HiEye
-                      className="text-gray-500 cursor-pointer absolute right-3"
-                      size={20}
-                      onClick={() =>
-                        setShow({ ...show, cpassword: !show.cpassword })
-                      }
-                    />
-                  )}
-                </div>
+                ) : (
+                  <HiEye
+                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    size={20}
+                    onClick={() =>
+                      setShow({ ...show, cpassword: !show.cpassword })
+                    }
+                  />
+                )}
                 {formik.errors.cpassword && formik.touched.cpassword && (
-                  <span className="text-rose-500">
+                  <span className="absolute text-rose-300 -bottom-8 left-4">
                     {formik.errors.cpassword}
                   </span>
                 )}
               </div>
 
-              {/* Other form fields, if any */}
-
-              <div className="mt-4">
+              <div className="mt-4 mx-auto">
                 <button
                   type="submit"
-                  className="btn-gradient bg-[#3fb22a] rounded-full text-center text-white max-w-[240px] px-8 py-2 text-[22px] hover:text-black hover:scale-[.96] duration-300"
+                  className="btn-gradient bg-[#3fb22a] rounded-full text-center text-white px-14 py-2 text-[22px] hover:text-black hover:scale-[.96] duration-300"
                 >
                   Реєстрація
                 </button>

@@ -16,10 +16,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.1.2",
     "@heroicons/react": "^2.0.10",
     "@hookform/resolvers": "^2.9.7",
+    "@mui/material": "^5.15.0",
     "@types/bcrypt": "^5.0.2",
     "@types/mongoose": "^5.11.97",
     "aos": "^2.3.4",
