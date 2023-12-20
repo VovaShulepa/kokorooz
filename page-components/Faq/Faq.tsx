@@ -116,7 +116,7 @@ export const Faq = () => {
             <Image
               src="/images/hero/phone2.png"
               alt="app screenshots"
-              className="mx-auto mb-8 object-cover notXl:hidden"
+              className="mx-auto mb-8 w-full h-auto object-cover notXl:hidden"
               width={360}
               height={400}
               data-aos="flip-right"

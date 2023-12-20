@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { Section } from '@/components/common/Section';
 import { Title } from '@/components/typography/Title';
 import { Paragraph } from '@/components/typography/Paragraph';
+import data from '@/data/registerData.json';
 
 interface FormValues {
   email: string;
@@ -27,9 +28,10 @@ interface SuccessfulSignInResponse extends SignInResponse {
 }
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const [show, setShow] = useState({ password: false });
 
   const formik = useFormik({
     initialValues: {
@@ -118,108 +120,129 @@ export default function Login() {
       </Head>
 
       <Section className="pt-40">
-        <div className="container flex notXl:flex-col xl:justify-around">
-          <div className="max-w-[550px]">
-            <Title tag="h2" className="mb-4 xl:mb-12 text-center">
-              Увійти
+        <div className="container flex notXl:flex-col xl:justify-around items-center">
+          <div>
+            <Title tag="h1" className="mb-4 text-center">
+              Умови партнерства
             </Title>
-            <Paragraph className="mx-auto text-gray-400 text-center mb-14">
-              Зареєструйтеся зараз, щоб отримати бонус у розмірі $2 на вашу
-              картку. Запросіть друга і отримайте додатковий $1! Завантажте
-              додаток і отримайте готівку сьогодні! 💳💸
-            </Paragraph>
+
+            <ul className="list-disc ml-4 flex flex-col gap-4">
+              {data.map((item, index) => (
+                <li key={index}>
+                  <Paragraph size="list" className="max-w-[600px]">
+                    <strong className="text-yellow-500">{item.title}</strong>{' '}
+                    {item.content}
+                  </Paragraph>
+                </li>
+              ))}
+              <p className="max-w-[600px] mt-8 text-base text-gray-200 text-center">
+                Додаток ще у тестовому режимі, тому всі ваші побажання чи
+                виправлення можуть з`явитись ближчим часом
+              </p>
+            </ul>
           </div>
 
-          <div>
+          <div className="notXl:mt-16 ">
             <form
-              className="flex flex-col gap-4 w-full xl:w-[400px] mx-auto"
+              className="flex flex-col gap-12 w-full xl:w-[400px] mx-auto"
               onSubmit={formik.handleSubmit}
             >
-              {errorMessage && (
-                <div className="text-red-500 text-center my-4">
-                  {errorMessage}
-                </div>
-              )}
-
-              <div className="relative flex items-center gap-4">
-                <HiAtSymbol
-                  className="text-gray-500 absolute right-3"
-                  size={25}
-                />
+              {/* Електронна пошта */}
+              <div className="flex flex-col relative">
                 <input
+                  id="email"
+                  autoComplete="email"
                   type="email"
-                  autoComplete="current-email"
-                  placeholder="Електронна пошта"
-                  className={`rounded-lg  bg-violet-400 text-gray-600 p-3 text-lg w-full focus:outline-none focus:ring-green-200   ${
+                  placeholder={
                     formik.errors.email && formik.touched.email
-                      ? 'border-rose-600'
-                      : 'border-yellow-300'
+                      ? formik.errors.email
+                      : 'Email'
+                  }
+                  className={`input py-3 px-6 text-xl text-yellow-300 border-none w-full rounded-full focus:ring-transparent bg-transparent ${
+                    formik.errors.email && formik.touched.email
+                      ? 'input-error placeholder-red'
+                      : 'border-none'
                   }`}
                   {...formik.getFieldProps('email')}
                 />
+                <HiAtSymbol
+                  className="text-violet-700 absolute right-6 top-1/2 transform -translate-y-1/2"
+                  size={20}
+                />
+                {formik.errors.email && formik.touched.email && (
+                  <span className="absolute text-rose-300 -bottom-8 left-4">
+                    {formik.errors.email}
+                  </span>
+                )}
               </div>
-              {formik.errors.email && formik.touched.email && (
-                <span className="text-rose-500 text-sm">
-                  {formik.errors.email}
-                </span>
-              )}
-
-              <div className="relative flex items-center gap-4">
+              {/* Пароль */}
+              <div className="flex flex-col relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Пароль"
-                  autoComplete="current-password"
-                  className={`rounded-lg text-gray-600 p-3 text-lg w-full focus:outline-none focus:ring focus:border-blue-300 ${
+                  id="password"
+                  type={show.password ? 'text' : 'password'}
+                  placeholder={
                     formik.errors.password && formik.touched.password
-                      ? 'border-rose-600'
-                      : 'border-gray-300'
+                      ? formik.errors.password
+                      : 'Пароль'
+                  }
+                  autoComplete="new-password"
+                  className={`input py-3 px-6 text-xl text-yellow-300 border-none w-full rounded-full focus:ring-transparent bg-transparent ${
+                    formik.errors.password && formik.touched.password
+                      ? 'input-error placeholder-red'
+                      : 'border-none'
                   }`}
                   {...formik.getFieldProps('password')}
                 />
-                {showPassword ? (
+                {show.password ? (
                   <HiEyeOff
-                    className="text-gray-500 cursor-pointer absolute right-3"
-                    size={25}
-                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-violet-700 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    size={20}
+                    onClick={() =>
+                      setShow({ ...show, password: !show.password })
+                    }
                   />
                 ) : (
                   <HiEye
-                    className="text-gray-500 cursor-pointer absolute right-3"
-                    size={25}
-                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-violet-700 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    size={20}
+                    onClick={() =>
+                      setShow({ ...show, password: !show.password })
+                    }
                   />
+                )}
+                {formik.errors.password && formik.touched.password && (
+                  <span className="absolute text-rose-300 -bottom-8 left-4">
+                    {formik.errors.password}
+                  </span>
                 )}
               </div>
 
-              {formik.errors.password && formik.touched.password && (
-                <span className="text-rose-500 text-sm">
-                  {formik.errors.password}
-                </span>
-              )}
-
-              <div className="mt-4">
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white rounded-full py-3 px-6 w-full hover:bg-blue-600"
-                >
-                  Увійти
-                </button>
-              </div>
-              <div className="mt-4">
-                <button
-                  type="button"
-                  onClick={handleGoogleSignin}
-                  className="bg-white text-gray-700 rounded-full py-3 px-6 flex items-center justify-center border border-gray-300 w-full hover:bg-gray-100"
-                >
-                  Увійти за допомогою Google{' '}
-                  <Image
-                    src="/google.svg"
-                    className="ml-2"
-                    alt="google"
-                    width="20"
-                    height={20}
-                  />
-                </button>
+              {/* Buttons */}
+              <div className="flex flex-col justify-center gap-4">
+                <div className="">
+                  <button
+                    type="submit"
+                    className="btn-gradient bg-[#3fb22a] text-lg w-full px-4 py-2 rounded-full text-white hover:text-black hover:scale-[.96] duration-300"
+                  >
+                    Увійти
+                  </button>
+                </div>
+                <div className="">
+                  <button
+                    type="button"
+                    onClick={handleGoogleSignin}
+                    className="bg-gray-300 text-black text-lg rounded-full py-2 px-4 flex items-center justify-center w-full hover:bg-gray-100 hover:scale-[.96] duration-300"
+                  >
+                    Увійти за допомогою Google{' '}
+                    <Image
+                      src="/google.svg"
+                      className="ml-2"
+                      alt="google"
+                      width="20"
+                      height={20}
+                    />
+                  </button>
+                </div>
               </div>
             </form>
 
@@ -227,7 +250,7 @@ export default function Login() {
               Ще не зареєстровані?{' '}
               <Link
                 href="/register"
-                className="text-blue-700 hover:text-blue-400"
+                className="text-violet-700 hover:text-violet-500"
               >
                 Реєстрація
               </Link>

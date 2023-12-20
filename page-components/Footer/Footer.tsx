@@ -78,8 +78,9 @@ export const Footer = () => {
                   src="/app_store.svg"
                   alt="App Store"
                   width={100}
-                  height={40}
-                  className="xl:w-[110px]"
+                  height={100}
+                  sizes="100vw"
+                  className="w-full h-auto"
                 />
               </a>
               <a
@@ -92,8 +93,9 @@ export const Footer = () => {
                   src="/google_play.svg"
                   alt="Google Play"
                   width={100}
-                  height={40}
-                  className="xl:w-[110px]"
+                  height={100}
+                  sizes="100vw"
+                  className="w-full h-auto"
                 />
               </a>
             </div>
@@ -121,13 +123,14 @@ export const Footer = () => {
         </div>
       </div>
       <div className="flex justify-center mb-4">
-        <p className="text-xs leading-5 text-gray-400">
-          Copyright © {currentYear} Kokorooz. All rights reserved. Created by{' '}
+        <p className="text-xs text-center leading-5 text-gray-400">
+          Copyright © {currentYear} Kokorooz. All rights reserved.
+          <br /> Created by{' '}
           <a
             href="https://t.me/Shulepchik"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-yellow-300 hover:text-violet-300 hover:underline"
+            className="text-yellow-300  hover:text-violet-300 hover:underline"
           >
             Shulepchik
           </a>

@@ -61,9 +61,10 @@ export const Hero = () => {
                 <Image
                   src="/images/hero/phone1.png"
                   alt="app screenshots"
-                  className="mb-8 object-cover block relative"
-                  width={260}
-                  height={400}
+                  className="mb-8 object-cover block relative w-[260px] h-auto"
+                  sizes="100vw"
+                  width={0}
+                  height={0}
                   data-aos="flip-left"
                 />
               </div>
@@ -78,19 +79,18 @@ export const Hero = () => {
                 <Image
                   src="/images/hero/phone2.png"
                   alt="app screenshots"
-                  className="mx-auto mb-8 block object-cover"
-                  width={260}
-                  height={400}
+                  className="mx-auto mb-8 block object-cover w-[260px] 
+                  h-auto"
+                  sizes="100vw"
+                  width={0}
+                  height={0}
                   data-aos="flip-right"
                 />
               </div>
             </div>
             {/* ===================== */}
 
-            <div
-              className="xl:flex items-center justify-between mt-4 mb-4 "
-              // data-aos="flip-left"
-            >
+            <div className="xl:flex items-center justify-between mt-4 mb-4 ">
               <div>
                 <Link
                   href="/register"
@@ -100,6 +100,7 @@ export const Hero = () => {
                   Детальніше
                 </Link>
               </div>
+
               {/* DOWNLOAD_APP */}
               <div className="notXl:mt-8">
                 <Title tag="h3" className="text-center font-normal  mb-4">
@@ -119,8 +120,8 @@ export const Hero = () => {
                       src="/app_store.svg"
                       alt="App Store"
                       width={130}
-                      height={40}
-                      className="xl:w-[130px]"
+                      height={0}
+                      className="w-full h-auto"
                     />
                   </a>
                   <a
@@ -133,8 +134,8 @@ export const Hero = () => {
                       src="/google_play.svg"
                       alt="Google Play"
                       width={130}
-                      height={40}
-                      className="xl:w-[130px]"
+                      height={0}
+                      className="w-full h-auto"
                     />
                   </a>
                 </div>
@@ -155,10 +156,11 @@ export const Hero = () => {
               <Image
                 src="/images/hero/phone1.png"
                 alt="app screenshots"
-                className="mb-8 object-cover block relative"
+                className="mb-8 object-cover block w-[320px] h-auto relative"
+                sizes="100vw"
                 quality={100}
-                width={320}
-                height={400}
+                width={0}
+                height={0}
                 data-aos="flip-left"
               />
             </div>
@@ -173,10 +175,11 @@ export const Hero = () => {
               <Image
                 src="/images/hero/phone2.png"
                 alt="app screenshots"
-                className="mx-auto mb-8 object-cover"
+                className="mx-auto mb-8 object-cover w-[320px] h-auto"
+                sizes="100vw"
                 quality={100}
-                width={320}
-                height={400}
+                width={0}
+                height={0}
                 data-aos="flip-right"
               />
             </div>

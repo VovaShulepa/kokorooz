@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { Dialog, Transition } from '@headlessui/react';
 import { FC, Fragment } from 'react';
-import { MenuModalProps } from './MenuModal.props';
 
+import { MenuModalProps } from './MenuModal.props';
 import Telegram from 'public/telegram.svg';
 import Instagram from 'public/instagram.svg';
 
@@ -11,6 +12,7 @@ export const MenuModal: FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const { data: session } = useSession();
 
   return (
     <>
@@ -59,7 +61,7 @@ export const MenuModal: FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
                       <li>
                         <Link
                           onClick={closeModal}
-                          href="#home"
+                          href="/"
                           className="text-2xl"
                         >
                           Головна
@@ -80,16 +82,29 @@ export const MenuModal: FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
                           Наші проекти
                         </Link>
                       </li>
-                      <li>
-                        <Link
-                          href=""
-                          rel="noopener noreferrer"
-                          target="_blank"
-                          className="btn-gradient bg-[#3fb22a] rounded-full font-bold text-center text-black px-6 py-2 text-[20px]"
-                        >
-                          Увійти
-                        </Link>
-                      </li>
+                      {session ? (
+                        <li>
+                          <Link
+                            href="/user"
+                            onClick={closeModal}
+                            rel="noopener noreferrer"
+                            className="bg-[#811aaa] rounded-full font-bold text-center text-yellow-300 px-6 py-2 text-[20px]"
+                          >
+                            {session.user?.name || 'User'}
+                          </Link>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link
+                            href="/login"
+                            onClick={closeModal}
+                            rel="noopener noreferrer"
+                            className="btn-gradient bg-[#3fb22a] rounded-full font-bold text-center text-black px-6 py-2 text-[20px]"
+                          >
+                            Увійти
+                          </Link>
+                        </li>
+                      )}
                     </ul>
                     <div className="w-[290px] mt-4 mb-4 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent mx-auto"></div>
                     <div className="flex justify-center gap-8">

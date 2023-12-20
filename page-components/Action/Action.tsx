@@ -15,11 +15,11 @@ export const Action = () => {
             data-aos="flip-down"
             src="/images/hero/phone1.png"
             alt="app screenshots"
-            loading="eager"
+            priority
             quality={100}
             width={300}
             height={300}
-            className="action-mobile notXl:mx-auto notXl:mb-8 xl:w-[408px] object-cover"
+            className="action-mobile notXl:mx-auto notXl:mb-8 w-full xl:w-[408px] object-cover"
           />
 
           <div>

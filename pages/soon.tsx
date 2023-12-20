@@ -38,7 +38,8 @@ export default function ComingSoon() {
               <Image
                 src="/images/hero/phone1.png"
                 alt="app screenshots"
-                className="mb-8 mobiles"
+                className="mb-8 mobiles h-auto w-auto"
+                priority
                 width={260}
                 height={400}
               />

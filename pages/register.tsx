@@ -20,12 +20,12 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center"
+      className="fixed inset-0 bg-transparent backdrop-filter backdrop-blur-lg z-50 flex items-center justify-center"
       onClick={onClose}
     >
-      <div className="bg-white p-6 rounded-md shadow-lg relative">
+      <div className="success-window rounded2xl rounded-2xl relative py-12">
         <span
-          className="absolute top-0 right-0 p-4 cursor-pointer text-2xl"
+          className="absolute top-2 right-4 cursor-pointer text-5xl"
           onClick={onClose}
         >
           &times;
@@ -103,7 +103,7 @@ const Register: React.FC = () => {
         <title>Реєстрація</title>
       </Head>
       <Section className="pt-40">
-        <div className="container flex notXl:flex-col justify-around">
+        <div className="container flex notXl:flex-col items-end justify-around">
           <div>
             <Title tag="h1" className="mb-4 text-center">
               Умови партнерства
@@ -126,7 +126,7 @@ const Register: React.FC = () => {
           </div>
 
           {/* form */}
-          <div className="notXl:mt-16 xl:ml-32">
+          <div className="notXl:mt-16 xl:ml-32 mx-auto">
             <form
               className="flex flex-col gap-12 xl:w-[400px]"
               onSubmit={formik.handleSubmit}
@@ -175,7 +175,7 @@ const Register: React.FC = () => {
                   {...formik.getFieldProps('email')}
                 />
                 <HiAtSymbol
-                  className="text-yellow-300 absolute right-6 top-1/2 transform -translate-y-1/2"
+                  className="text-violet-700 absolute right-6 top-1/2 transform -translate-y-1/2"
                   size={20}
                 />
                 {formik.errors.email && formik.touched.email && (
@@ -195,7 +195,7 @@ const Register: React.FC = () => {
                       ? formik.errors.password
                       : 'Пароль'
                   }
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   className={`input py-3 px-6 text-xl text-yellow-300 border-none w-full rounded-full focus:ring-transparent bg-transparent ${
                     formik.errors.password && formik.touched.password
                       ? 'input-error placeholder-red'
@@ -205,7 +205,7 @@ const Register: React.FC = () => {
                 />
                 {show.password ? (
                   <HiEyeOff
-                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    className="text-violet-700 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
                     size={20}
                     onClick={() =>
                       setShow({ ...show, password: !show.password })
@@ -213,7 +213,7 @@ const Register: React.FC = () => {
                   />
                 ) : (
                   <HiEye
-                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    className="text-violet-700 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
                     size={20}
                     onClick={() =>
                       setShow({ ...show, password: !show.password })
@@ -232,6 +232,7 @@ const Register: React.FC = () => {
                 <input
                   id="cpassword"
                   type={show.cpassword ? 'text' : 'password'}
+                  autoComplete="new-password"
                   placeholder={
                     formik.errors.cpassword && formik.touched.cpassword
                       ? formik.errors.cpassword
@@ -246,7 +247,7 @@ const Register: React.FC = () => {
                 />
                 {show.cpassword ? (
                   <HiEyeOff
-                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    className="text-violet-700 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
                     size={20}
                     onClick={() =>
                       setShow({ ...show, cpassword: !show.cpassword })
@@ -254,7 +255,7 @@ const Register: React.FC = () => {
                   />
                 ) : (
                   <HiEye
-                    className="text-yellow-300 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
+                    className="text-violet-700 cursor-pointer absolute right-6 top-1/2 transform -translate-y-1/2"
                     size={20}
                     onClick={() =>
                       setShow({ ...show, cpassword: !show.cpassword })
@@ -278,9 +279,12 @@ const Register: React.FC = () => {
               </div>
             </form>
 
-            <Paragraph size="small" className="mt-4 text-center text-gray-400">
+            <Paragraph size="list" className="mt-4 text-center text-gray-500">
               Вже маєте обліковий запис?{' '}
-              <Link href="/login" className="text-blue-700 hover:text-blue-400">
+              <Link
+                href="/login"
+                className="text-violet-500 hover:text-violet-400"
+              >
                 Увійти
               </Link>
             </Paragraph>
@@ -291,16 +295,16 @@ const Register: React.FC = () => {
       {/* Модальне вікно успішної реєстрації */}
       {isSuccessModalOpen && (
         <Modal onClose={redirectToUserPage}>
-          <p className="text-2xl pt-7 font-bold text-orange-600 mb-4 text-center">
+          <p className="text-3xl font-bold mb-8 text-center max-w-[400px]">
             Вітаємо! Ви успішно зареєструвалися! &#127881;
           </p>
+
           <button
-            onClick={redirectToUserPage}
-            className="w-full bg-blue-500 p-2 rounded-md hover:bg-blue-600"
+            type="submit"
+            className="btn-gradient block mx-auto bg-[#3fb22a] rounded-full text-center text-white px-14 py-2 text-[22px] hover:text-black hover:scale-[.96] duration-300"
           >
             OK
           </button>
-          ``
         </Modal>
       )}
     </>

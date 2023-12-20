@@ -12,7 +12,11 @@ import Link from 'next/link';
 interface UserProps {
   session: Session;
   userCount: number;
-  users: { username: string; email: string }[];
+  users: {
+    _id: string | null | undefined;
+    username: string;
+    email: string;
+  }[];
 }
 
 export const getServerSideProps: GetServerSideProps<UserProps> = async ({
@@ -102,7 +106,7 @@ export default function User({ session, userCount, users }: UserProps) {
                   <tbody>
                     {users.map((user, index) => (
                       <tr
-                        key={user.email}
+                        key={user._id}
                         className={
                           index % 2 === 0 ? 'bg-gray-600' : 'bg-gray-900'
                         }

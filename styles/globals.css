@@ -56,16 +56,18 @@
   box-shadow: 0 1px 38px 8px rgba(81, 1, 156, 0.815);
 }
 .input {
-  box-shadow: 0 1px 38px 8px rgba(81, 1, 156, 0.815);
+  box-shadow: 0 0px 21px 1px rgba(81, 1, 156, 0.815);
 }
 .input:focus {
-  box-shadow: 0 1px 38px 8px rgba(167, 98, 231, 0.815);
+  box-shadow: 0 0px 21px 2px rgba(167, 98, 231, 0.815);
 }
 
 .input-error {
-  box-shadow: 0 1px 38px 4px rgba(255, 10, 10, 0.815);
+  box-shadow: 0 0px 21px 2px rgba(255, 10, 10, 0.815);
 }
-
+.success-window {
+  box-shadow: 0 0px 31px 9px rgba(81, 1, 156, 0.815);
+}
 .btn-gradient {
   transition: 500ms;
   cursor: pointer;
