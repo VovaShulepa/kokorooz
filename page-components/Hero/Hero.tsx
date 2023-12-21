@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,16 +9,17 @@ import { Section } from '@/components/common/Section';
 export const Hero = () => {
   const [activeImage, setActiveImage] = useState(1);
 
-  const toggleImage = () => {
+  const toggleImage = useCallback(() => {
     setActiveImage(prev => (prev === 1 ? 2 : 1));
-  };
+  }, []);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       toggleImage();
     }, 3500);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [toggleImage]);
 
   return (
     <Section className="pt-40">
@@ -60,9 +61,10 @@ export const Hero = () => {
               >
                 <Image
                   src="/images/hero/phone1.png"
-                  alt="app screenshots"
+                  alt="app screenshots 3"
                   className="mb-8 object-cover block relative w-[260px] h-auto"
                   sizes="100vw"
+                  priority
                   width={0}
                   height={0}
                   data-aos="flip-left"
@@ -78,10 +80,11 @@ export const Hero = () => {
               >
                 <Image
                   src="/images/hero/phone2.png"
-                  alt="app screenshots"
+                  alt="app screenshots 4"
                   className="mx-auto mb-8 block object-cover w-[260px] 
                   h-auto"
                   sizes="100vw"
+                  loading="lazy"
                   width={0}
                   height={0}
                   data-aos="flip-right"
@@ -155,7 +158,7 @@ export const Hero = () => {
             >
               <Image
                 src="/images/hero/phone1.png"
-                alt="app screenshots"
+                alt="app screenshots 1"
                 className="mb-8 object-cover block w-[320px] h-auto relative"
                 sizes="100vw"
                 quality={100}
@@ -174,7 +177,7 @@ export const Hero = () => {
             >
               <Image
                 src="/images/hero/phone2.png"
-                alt="app screenshots"
+                alt="app screenshots 2"
                 className="mx-auto mb-8 object-cover w-[320px] h-auto"
                 sizes="100vw"
                 quality={100}

@@ -7,8 +7,6 @@ const connectMongo = async (): Promise<boolean | undefined> => {
       process.env.MONGO_URL || '',
     );
 
-    console.log(connectMongo);
-
     if (connection.readyState === 1) {
       console.log('MongoDB Connected Successfully');
       return true;
@@ -18,8 +16,7 @@ const connectMongo = async (): Promise<boolean | undefined> => {
     return undefined;
   }
 
-  console.log(connectMongo);
-  return undefined;
+  return false;
 };
 
 export default connectMongo;

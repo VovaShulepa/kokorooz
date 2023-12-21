@@ -29,7 +29,7 @@ interface SuccessfulSignInResponse extends SignInResponse {
 
 export default function Login() {
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [, setErrorMessage] = useState<string>('');
 
   const [show, setShow] = useState({ password: false });
 
@@ -54,21 +54,22 @@ export default function Login() {
         callbackUrl: '/',
       });
 
-      console.log('Authentication status:', result);
+      console.log('Статус автентифікації:', result);
 
       if (result && result.ok) {
         const successfulResult = result as SuccessfulSignInResponse; // Type assertion
         console.log('Redirecting to:', successfulResult.url);
         router.push('/user');
       } else {
-        console.error('Authentication failed:', result?.error);
+        console.error('Помилка автентифікації:', result?.error);
         if (
           result &&
-          result.error === 'No user found with this email. Please sign up!'
+          result.error ===
+            'Користувача з цим Email не знайдено. Будь ласка, зареєструйтеся!'
         ) {
-          formik.setFieldError('email', 'User with this email not found');
+          formik.setFieldError('email', 'Користувача з цим Email не знайдено!');
         } else {
-          formik.setFieldError('password', 'Incorrect email or password');
+          formik.setFieldError('password', 'Неправильний Пароль');
         }
       }
     } catch (error) {

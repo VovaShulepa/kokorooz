@@ -11,12 +11,6 @@ export const Map = () => {
         <div className="flex flex-col">
           <Title tag="h2" className="text-center mb-8 xl:mb-14">
             Нові друзі у твоєму місті
-            {/* <Image
-              src="/map-pin.png"
-              alt="app screenshots"
-              width={40}
-              height={40}
-            /> */}
           </Title>
 
           <div className="flex xl:hidden" data-aos="zoom-in">
@@ -25,6 +19,7 @@ export const Map = () => {
                 src="/map.jpeg"
                 alt="app screenshots"
                 className="mb-8 map w-full rounded-3xl object-cover block"
+                priority
                 quality={100}
                 width={560}
                 height={300}
@@ -33,6 +28,7 @@ export const Map = () => {
                 src="/map-pin.png"
                 alt="gps pin"
                 className="gps-pin absolute bottom-[90px] right-[160px]"
+                priority
                 quality={100}
                 width={50}
                 height={50}
@@ -74,6 +70,7 @@ export const Map = () => {
                   src="/map.jpeg"
                   alt="app map"
                   className="map mb-8 w-full xl:max-w-[600px] rounded-3xl object-cover "
+                  priority
                   quality={100}
                   width={560}
                   height={300}

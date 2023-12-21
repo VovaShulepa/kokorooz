@@ -33,7 +33,7 @@ export default class MyDocument extends Document {
             rel="icon"
             type="image/png"
             sizes="192x192"
-            href="/favicon/android-chrome-192x192.png"
+            href="/favicon/android-chrome-192x192"
           />
 
           <link
